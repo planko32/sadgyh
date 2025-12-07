@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Account Information</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <style>
+    :root {
+      --bg-main: #05060b;
+      --bg-card: #111827;
+      --bg-card-soft: #151b26;
+      --text-primary: #ffffff;
+      --text-secondary: #7b8194;
+      --accent: #18c1ff;
+      --border-subtle: #262a3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    }
+
+    .app {
+      min-height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 12px 12px 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background-color: #151824;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-btn img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .content {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 16px;
+      padding: 10px 14px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .row + .row {
+      border-top: 1px solid #151b26;
+    }
+
+    .label {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .value {
+      font-size: 13px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .value-link {
+      font-size: 13px;
+      color: var(--text-primary);
+      border-bottom: 0.5px solid var(--text-primary);
+      padding-bottom: 1px;
+    }
+
+    .value-accent {
+      color: var(--accent);
+    }
+
+    .avatar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid #333a4c;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .chevron {
+      width: 6px;
+      height: 6px;
+      border-right: 1px solid var(--text-secondary);
+      border-bottom: 1px solid var(--text-secondary);
+      transform: rotate(-45deg);
+      margin-left: 2px;
+    }
+
+    .copy-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid var(--text-secondary);
+      position: relative;
+    }
+
+    .copy-icon::before,
+    .copy-icon::after {
+      content: "";
+      position: absolute;
+      border: 1px solid var(--text-secondary);
+      border-radius: 2px;
+    }
+
+    .copy-icon::before {
+      width: 8px;
+      height: 6px;
+      left: 3px;
+      top: 3px;
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+    }
+
+    .copy-icon::after {
+      width: 8px;
+      height: 6px;
+      left: 1px;
+      top: 1px;
+      border-bottom: 1px solid transparent;
+      border-right: 1px solid transparent;
+    }
+
+    @media (min-width: 481px) {
+      body {
+        display: flex;
+        justify-content: center;
+        background-color: #000;
+      }
+      .app {
+        margin-top: 12px;
+        border-radius: 20px;
+        border: 1px solid #171924;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <div class="back-btn">
+        <img src="files/back-icon-D2ne3Npi.png" alt="Back" />
+      </div>
+      <div class="title">Account Information</div>
+    </header>
+
+    <main class="content">
+      <!-- Card 1 -->
+      <section class="card">
+        <div class="row">
+          <div class="label">Profile Picture</div>
+          <div class="avatar-wrapper">
+            <div class="avatar">
+              <img src="files/ec72cc3f0db8049d48f6fbcea83f4437.png" alt="Avatar" />
+            </div>
+            <div class="chevron"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">ID</div>
+          <div class="value">
+            <span>90440407</span>
+            <div class="copy-icon"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Phone</div>
+          <div class="value">
+            <span class="value-link">70758137</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 2 -->
+      <section class="card">
+        <div class="row">
+          <div class="label">Email</div>
+          <div class="value">
+            <span class="value-link">ieudhehehe@mozej.com</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Registration Time</div>
+          <div class="value">
+            <span>2025-11-29 16:44:43</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 3 -->
+      <section class="card">
+        <div class="row">
+          <div class="label">Registration Method</div>
+          <div class="value">
+            <span>Phone</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
