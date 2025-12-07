@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Member</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #05070b;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      height: 44px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+    }
+
+    .header-left {
+      width: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    .back-icon {
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      transform: rotate(45deg);
+    }
+
+    .header-title {
+      flex: 1;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .header-right {
+      width: 40px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 12px 12px 24px;
+      overflow-y: auto;
+    }
+
+    .level-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .current-level-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 14px;
+      background: #122b40;
+      font-size: 11px;
+    }
+
+    .current-level-pill img {
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+      border-radius: 50%;
+    }
+
+    .next-level {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 8px 0;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    .tab.active {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      left: 25%;
+      right: 25%;
+      bottom: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: #f6c453;
+    }
+
+    .vip-banner {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background-image: url("files/level-big-bg-h5-1-DBrok_Wn.png");
+      background-size: cover;
+      background-position: center;
+      min-height: 120px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .vip-banner-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .vip-level-label {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .vip-icon {
+      width: 70px;
+      height: 70px;
+    }
+
+    .vip-locked {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 6px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.35);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .vip-locked::before {
+      content: "\1F512";
+      font-size: 12px;
+      margin-right: 6px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .progress-wrapper {
+      margin-bottom: 14px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 4px;
+    }
+
+    .progress-bar {
+      position: relative;
+      height: 4px;
+      border-radius: 999px;
+      background: #101b20;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 55%;
+      background: linear-gradient(90deg, #f6c453, #f5e3a4);
+    }
+
+    .progress-dots {
+      position: relative;
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #101b20;
+      border: 1px solid #f6c453;
+    }
+
+    .stats-grid {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card {
+      flex: 1;
+      border-radius: 10px;
+      background: #101b20;
+      padding: 10px;
+    }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .stat-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+    }
+
+    .stat-title {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .stat-value {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .tip-text {
+      margin: 8px 2px 16px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .benefits-card {
+      border-radius: 14px;
+      background: #101b20;
+      padding: 12px 12px 14px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .benefit-item {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .benefit-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .benefit-icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 4px;
+    }
+
+    .benefit-main {
+      font-weight: 500;
+    }
+
+    .benefit-desc {
+      font-size: 11px;
+      margin-top: 2px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .benefit-full-row {
+      grid-column: span 2;
+    }
+
+    .profit-rate {
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    .profit-rate span {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="header-left">
+        <a href="javascript:history.back();" class="back-btn" aria-label="Back">
+          <span class="back-icon"></span>
+        </a>
+      </div>
+      <div class="header-title">Member</div>
+      <div class="header-right"></div>
+    </div>
+
+    <div class="main">
+      <div class="level-bar">
+        <div class="current-level-pill">
+          <img src="files/user-1-EGMbdrEX.png" alt="" />
+          <span>Current Member Level:V0</span>
+        </div>
+        <div class="next-level">Next Level:V2</div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active">V1</div>
+        <div class="tab">V2</div>
+        <div class="tab">V3</div>
+        <div class="tab">V4</div>
+        <div class="tab">V5</div>
+        <div class="tab">V6</div>
+      </div>
+
+      <div class="vip-banner">
+        <div class="vip-banner-top">
+          <div>
+            <div class="vip-level-label">V1</div>
+            <div class="vip-locked">Locked at this Level</div>
+          </div>
+          <img src="files/vip1_icon-4ZSc4Mlc.png" alt="V1" class="vip-icon" />
+        </div>
+      </div>
+
+      <div class="section-title">V1Level Achievement Conditions:</div>
+      <div class="progress-wrapper">
+        <div class="progress-labels">
+          <span>Not Achieved</span>
+          <span>Achieved</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-dots">
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <img src="files/user-2-NAAgvz2o.png" class="stat-icon" alt="" />
+            <div class="stat-title">USDT Balance</div>
+          </div>
+          <div class="stat-value">3.06/50</div>
+          <div class="stat-sub">USDT Balance</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header">
+            <img src="files/level-icon-DjXZ55xB.png" class="stat-icon" alt="" />
+            <div class="stat-title">Number of effective users</div>
+          </div>
+          <div class="stat-value">0/0</div>
+          <div class="stat-sub">Number of effective users of direct push and promotion</div>
+        </div>
+      </div>
+
+      <div class="tip-text">
+        Effective user: VIP level 1 and above is a valid user
+      </div>
+
+      <div class="section-title">V1Level Benefits:</div>
+      <div class="benefits-card">
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-label">
+              <img src="files/user-1-EGMbdrEX.png" class="benefit-icon" alt="" />
+              <span class="benefit-main">Minimum Withdrawal Amount per Transaction</span>
+            </div>
+            <div class="benefit-desc">20 USDT</div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-label">
+              <img src="files/user-2-NAAgvz2o.png" class="benefit-icon" alt="" />
+              <span class="benefit-main">Maximum Withdrawal Amount per Transaction</span>
+            </div>
+            <div class="benefit-desc">500 USDT</div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-label">
+              <img src="files/level-icon-DjXZ55xB.png" class="benefit-icon" alt="" />
+              <span class="benefit-main">Withdrawal Fee</span>
+            </div>
+            <div class="benefit-desc">5%</div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-label">
+              <img src="files/vip1_icon-4ZSc4Mlc.png" class="benefit-icon" alt="" />
+              <span class="benefit-main">Team income level</span>
+            </div>
+            <div class="benefit-desc">3Level</div>
+          </div>
+
+          <div class="benefit-item benefit-full-row">
+            <div class="benefit-label">
+              <img src="files/user-1-EGMbdrEX.png" class="benefit-icon" alt="" />
+              <span class="benefit-main">Generation Profit Rate</span>
+            </div>
+            <div class="profit-rate">
+              <span>LV.1 20%</span>
+              <span>LV.2 5%</span>
+              <span>LV.3 3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
