@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Invite Friends - EXARAI</title>
+  <link rel="stylesheet" href="invite-style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <a href="javascript:history.back()" class="back-btn">
+        <div class="back-arrow"></div>
+      </a>
+      <div class="app-header-title">Invite Friends</div>
+    </header>
+
+    <main class="app-main">
+      <div class="page-title">Invite friends and earn more rewards</div>
+
+      <section class="poster-card">
+        <div class="poster-inner">
+          <img src="invite-bg.png" alt="Invite Friends Poster" />
+        </div>
+      </section>
+
+      <section class="info-card">
+        <div class="info-row-label">Link</div>
+        <div class="info-row">
+          <span class="value" id="inviteLink">https://exarai.online/register/959R6PQ</span>
+          <button class="copy-btn" type="button" data-target="inviteLink">Copy</button>
+        </div>
+
+        <div class="info-row-label">Invitation Code</div>
+        <div class="info-row">
+          <span class="value" id="inviteCode">959R6PQ</span>
+          <button class="copy-btn" type="button" data-target="inviteCode">Copy</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      function copyText(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var text = el.textContent || el.innerText;
+        if (!navigator.clipboard) {
+          var textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(textarea);
+          return;
+        }
+        navigator.clipboard.writeText(text).catch(function() {});
+      }
+
+      var buttons = document.querySelectorAll('.copy-btn');
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var target = btn.getAttribute('data-target');
+          copyText(target);
+          btn.textContent = 'Copied';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
