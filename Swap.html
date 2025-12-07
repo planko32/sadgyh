@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swap</title>
+  <style>
+    :root {
+      --bg-color: #05060e;
+      --card-bg: #121622;
+      --accent: #35c2ff;
+      --accent-soft: #4de88a;
+      --text-main: #f5f5f5;
+      --text-sub: #9ba0b8;
+      --border-color: #252a3b;
+      --btn-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        system-ui, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 40px;
+      background-color: var(--bg-color);
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg-color);
+      padding: 12px 16px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left,
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid #2d3242;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      padding: 0;
+      outline: none;
+    }
+
+    .icon-chevron {
+      width: 9px;
+      height: 16px;
+    }
+
+    .icon-small {
+      width: 14px;
+      height: 14px;
+    }
+
+    main {
+      padding: 8px 16px 0;
+    }
+
+    .swap-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 12px 14px 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .swap-card + .swap-card {
+      margin-top: 12px;
+    }
+
+    .swap-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .swap-card-header span:first-child {
+      color: var(--text-sub);
+    }
+
+    .balance {
+      color: var(--text-sub);
+    }
+
+    .balance-value {
+      color: #3ac8ff;
+    }
+
+    .swap-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .amount-input {
+      flex: 1;
+      background: #070917;
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid #272c40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 42px;
+    }
+
+    .amount-placeholder {
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    .max-btn {
+      font-size: 13px;
+      font-weight: 600;
+      color: #21b1ff;
+      margin-right: 8px;
+    }
+
+    .token-select {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #101421;
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid #31374a;
+      min-width: 88px;
+      justify-content: center;
+    }
+
+    .token-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .token-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .token-symbol {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #7b8195;
+      border-bottom: 2px solid #7b8195;
+      transform: rotate(45deg);
+      margin-top: -2px;
+    }
+
+    .swap-middle {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .swap-middle-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: #14192a;
+      border: 1px solid #252a3b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .swap-middle-circle img {
+      width: 14px;
+      height: 14px;
+    }
+
+    .swap-button {
+      margin-top: 16px;
+      margin-bottom: 14px;
+    }
+
+    .swap-button button {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: 22px;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #000;
+      background-image: linear-gradient(90deg, #3dd4ff, #54ffae);
+      box-shadow: 0 6px 14px rgba(33, 232, 184, 0.25);
+    }
+
+    .swap-info {
+      font-size: 12px;
+      color: var(--text-sub);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .swap-info-row {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-left">
+        <button class="icon-btn" aria-label="Back">
+          <img src="files/arrow-right.png" alt="Back" class="icon-chevron" />
+        </button>
+        <div class="header-title">Swap</div>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" aria-label="Refresh">
+          <span class="icon-small">&#8635;</span>
+        </button>
+        <button class="icon-btn" aria-label="History">
+          <span class="icon-small">&#9776;</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="swap-card">
+        <div class="swap-card-header">
+          <span>From</span>
+          <span class="balance">
+            Balance:
+            <span class="balance-value">3.06</span>
+          </span>
+        </div>
+        <div class="swap-row">
+          <div class="amount-input">
+            <span class="amount-placeholder">0</span>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <span class="max-btn">MAX</span>
+              <div class="token-select">
+                <div class="token-icon">
+                  <img src="files/usdt.jpg" alt="USDT" />
+                </div>
+                <span class="token-symbol">USDT</span>
+                <span class="caret"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="swap-middle">
+        <div class="swap-middle-circle">
+          <img src="files/arrow-right.png" alt="Switch" />
+        </div>
+      </div>
+
+      <section class="swap-card">
+        <div class="swap-card-header">
+          <span>To</span>
+          <span class="balance">
+            Balance:
+            <span class="balance-value">0</span>
+          </span>
+        </div>
+        <div class="swap-row">
+          <div class="amount-input">
+            <span class="amount-placeholder">0</span>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <div class="token-select">
+                <div class="token-icon">
+                  <img src="files/usdc.png" alt="USDC" />
+                </div>
+                <span class="token-symbol">USDC</span>
+                <span class="caret"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="swap-button">
+        <button type="button">Swap</button>
+      </div>
+
+      <div class="swap-info">
+        <div class="swap-info-row">
+          <span>Rate</span>
+          <span>1 USDT = 1 USDC</span>
+        </div>
+        <div class="swap-info-row">
+          <span>Expected to get</span>
+          <span>0 USDC</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

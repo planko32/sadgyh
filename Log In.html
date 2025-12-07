@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Log In</title>
+  <style>
+    :root {
+      --page-bg: #05070b;
+      --card-bg: #05070b;
+      --field-bg: #17202d;
+      --prefix-bg: #0e131b;
+      --border-color: #343b48;
+      --text-main: #ffffff;
+      --text-muted: #7b8593;
+      --primary-gradient-start: #00c3aa;
+      --primary-gradient-end: #0063ff;
+      --link-color: #1ea7ff;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      background-color: var(--page-bg);
+      color: var(--text-main);
+    }
+
+    .page {
+      min-height: 100vh;
+      background-color: var(--page-bg);
+      color: var(--text-main);
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero img.hero-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-button {
+      position: absolute;
+      top: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: rgba(5, 10, 18, 0.8);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-button.back {
+      left: 12px;
+    }
+
+    .hero-button.support {
+      right: 12px;
+    }
+
+    .back-arrow {
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      transform: rotate(45deg);
+    }
+
+    .support-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .support-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .field-label {
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .phone-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .prefix-box {
+      min-width: 96px;
+      height: 48px;
+      border-radius: 8px;
+      padding: 0 12px;
+      background-color: var(--prefix-bg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .prefix-box span {
+      display: inline-block;
+    }
+
+    .arrow-down {
+      width: 8px;
+      height: 8px;
+      border-left: 2px solid #ffffffd9;
+      border-bottom: 2px solid #ffffffd9;
+      transform: rotate(-45deg);
+      margin-left: 6px;
+    }
+
+    .input-field {
+      flex: 1;
+      height: 48px;
+      border-radius: 8px;
+      background-color: var(--field-bg);
+      border: 1px solid var(--border-color);
+      padding: 0 16px;
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .input-field::placeholder {
+      color: var(--text-muted);
+    }
+
+    .password-wrapper {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .password-wrapper input {
+      width: 100%;
+      padding-right: 44px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(10, 15, 24, 0.8);
+    }
+
+    .helper-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      margin-top: 2px;
+      font-size: 12px;
+    }
+
+    .remember-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .checkbox {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+    }
+
+    .forgot-link {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    .forgot-link:active,
+    .forgot-link:focus-visible {
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 52px;
+      border-radius: 999px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      background-image: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+      box-shadow: 0 8px 18px rgba(0, 99, 255, 0.3);
+      margin-bottom: 14px;
+    }
+
+    .login-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(0, 99, 255, 0.35);
+    }
+
+    .terms {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .terms a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    .terms a:active,
+    .terms a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .signup {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .signup a {
+      color: var(--link-color);
+      text-decoration: none;
+      margin-left: 4px;
+    }
+
+    .signup a:active,
+    .signup a:focus-visible {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 480px) {
+      .page {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <img src="files/login-bg-h5.png" alt="EXARAI background" class="hero-bg" />
+      <button class="hero-button back" type="button">
+        <span class="back-arrow"></span>
+      </button>
+      <button class="hero-button support" type="button">
+        <span class="support-icon">
+          <img src="files/customer-service.png" alt="Support" />
+        </span>
+      </button>
+    </header>
+
+    <main class="content">
+      <h1 class="title">Log In</h1>
+
+      <div class="field">
+        <div class="field-label">Phone</div>
+        <div class="phone-row">
+          <button type="button" class="prefix-box">
+            <span>+386</span>
+            <span class="arrow-down"></span>
+          </button>
+          <input
+            type="tel"
+            class="input-field"
+            placeholder="Enter phone"
+            autocomplete="tel"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Password</div>
+        <div class="password-wrapper">
+          <input
+            type="password"
+            class="input-field"
+            placeholder="Your password must be at least 8 characters"
+            autocomplete="current-password"
+          />
+          <button type="button" class="toggle-password">👁</button>
+        </div>
+      </div>
+
+      <div class="options-row">
+        <label class="remember-box">
+          <span class="checkbox"></span>
+          <span>Remember account</span>
+        </label>
+        <a href="#" class="forgot-link">Forgot Password?</a>
+      </div>
+
+      <button type="button" class="login-btn">Log In</button>
+
+      <p class="terms">
+        By logging in, I agree to the TARM
+        <a href="#">Service Agreement</a>
+        and
+        <a href="#">Privacy Policy</a>
+      </p>
+
+      <p class="signup">
+        Don't have an account yet?
+        <a href="#">Sign Up</a>
+      </p>
+    </main>
+  </div>
+</body>
+</html>
